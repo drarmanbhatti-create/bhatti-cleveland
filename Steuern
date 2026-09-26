@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Deutscher Steuer-Layer – Bhatti & Cleveland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<style>:root{
+  --paper:#F6F7F9; --panel:#FFFFFF; --ink:#16202E; --muted:#5B6675; --rule:#D9DEE5;
+  --teal:#0E6E6B; --teal-soft:#E3F0EF; --amber:#B45309; --amber-soft:#FBF0E1; --red:#A4262C; --red-soft:#F7E4E5;
+  --focus:#2F5FD0;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+svg{display:block;overflow:hidden;max-width:100%;height:auto}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+.wrap{max-width:1140px;margin:0 auto;padding:32px 20px 48px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.2vw,36px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 4px}
+h3{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--ink)}
+p.lead{max-width:68ch;color:var(--muted);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:28px;align-items:start}
+.grid>*{min-width:0}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.inputs{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:6px 18px 16px;position:sticky;top:12px}
+@media (max-width:900px){.inputs{position:static}}
+details{border-bottom:1px solid var(--rule);padding:10px 0}
+details:last-of-type{border-bottom:0}
+summary{cursor:pointer;font-weight:600;font-size:14px;padding:4px 0;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--muted);font-weight:400}
+details[open] summary::after{content:"–"}
+summary::-webkit-details-marker{display:none}
+.field{margin:10px 0 4px}
+.field label{display:flex;justify-content:space-between;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:4px;gap:2px 8px;min-width:0}
+.field label span:first-child,.field label>*:first-child{min-width:0}
+.field label output{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+.field input[type=range]{width:100%;accent-color:var(--teal)}
+.field input[type=number]{width:100%;padding:7px 9px;border:1px solid var(--rule);border-radius:4px;font:inherit;font-variant-numeric:tabular-nums;background:#fff;color:var(--ink)}
+.hint{font-size:12px;color:var(--muted);margin-top:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.toolbar{display:flex;gap:8px;align-items:center;margin:0 0 14px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:#fff}
+.seg button{border:0;background:transparent;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+button.reset{border:1px solid var(--rule);background:#fff;border-radius:4px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;margin-bottom:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border-top:1px solid var(--rule)}
+.kpi{padding:12px 14px 12px 0;border-bottom:1px solid var(--rule)}
+.kpi .k{font-size:12.5px;color:var(--muted)}
+.kpi .v{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi .s{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:4px;font-size:13.5px;margin-top:12px}
+.verdict.ok{background:var(--teal-soft);color:#0B4F4D}
+.verdict.warn{background:var(--amber-soft);color:#7A3A06}
+.verdict.bad{background:var(--red-soft);color:#7C1C21}
+.verdict b{white-space:nowrap}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+th,td{padding:7px 9px;text-align:right;font-size:13px;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font-weight:600;color:var(--muted)}
+td:first-child,th:first-child{text-align:left}
+tr.sum td{font-weight:600;border-top:1px solid var(--ink)}
+.neg{color:var(--red)}
+.foot{font-size:12.5px;color:var(--muted);max-width:90ch}
+.foot p{margin:0 0 8px}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:6px;padding:18px 20px;margin:22px 0}
+.cta p{margin:0;max-width:62ch;color:#D6DCE4;font-size:14px}
+.cta a{background:#fff;color:var(--ink);text-decoration:none;font-weight:600;padding:9px 14px;border-radius:4px;font-size:14px;white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){.bar{transition:height .25s ease,y .25s ease}}
+ol.cascade{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:6px}
+ol.cascade li{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:4px;background:var(--teal-soft);font-size:13.5px}
+ol.cascade li.no{background:var(--red-soft)}
+ol.cascade .n{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:600}
+ol.cascade li.no .n{background:var(--red)}
+</style></head><body><div class="wrap">
+  <h1>Der deutsche Steuer-Layer ohne Doppelbesteuerungsabkommen</h1>
+  <p class="lead">Das DBA Deutschland–VAE ist zum 31.12.2021 ausgelaufen, ein Nachfolgeabkommen besteht nicht. Es bleibt bei der einseitigen Anrechnung nach § 34c EStG bzw. § 26 KStG, nicht bei einer Freistellung. Was das für vier typische Strukturen bedeutet, und was beim Exit, beim Wegzug und bei der Hinzurechnung zusätzlich greift.</p>
+
+  <div class="grid">
+    <form class="inputs" id="f" onsubmit="return false" aria-label="Annahmen">
+      <details open><summary>Objekt und Portfolio</summary>
+        <div class="field"><label for="P">Kaufpreis (AED) <output id="o_P"></output></label><input type="range" id="P" min="500000" max="15000000" step="50000"></div>
+        <div class="field"><label for="A">Fläche (sqft) <output id="o_A"></output></label><input type="range" id="A" min="300" max="6000" step="25"></div>
+        <div class="field"><label for="PGI">Jahresmiete Vollvermietung (AED) <output id="o_PGI"></output></label><input type="range" id="PGI" min="30000" max="1200000" step="1000"></div>
+        <div class="field"><label for="v">Leerstand <output id="o_v"></output></label><input type="range" id="v" min="0" max="0.25" step="0.01"></div>
+        <div class="field"><label for="SC">Service Charge (AED/sqft) <output id="o_SC"></output></label><input type="range" id="SC" min="8" max="40" step="0.5"></div>
+        <div class="field"><label for="N">Portfolio-Faktor <output id="o_N"></output></label><input type="range" id="N" min="1" max="100" step="1"></div>
+      </details>
+      <details><summary>Finanzierung</summary>
+        <div class="field"><label for="LTV">Ziel-Beleihung (LTV) <output id="o_LTV"></output></label><input type="range" id="LTV" min="0" max="0.75" step="0.05"></div>
+        <div class="field"><label for="rate">Zins p. a. <output id="o_rate"></output></label><input type="range" id="rate" min="0.025" max="0.08" step="0.0025"></div>
+        <div class="field"><label for="n">Laufzeit (Jahre) <output id="o_n"></output></label><input type="range" id="n" min="10" max="25" step="1"></div>
+        <div class="field"><label for="dmin">Mindest-DSCR <output id="o_dmin"></output></label><input type="range" id="dmin" min="1" max="1.6" step="0.05"></div>
+      </details>
+      <details><summary>Exit (§ 23 EStG)</summary>
+        <div class="field"><label for="cap">Exit-Cap-Rate <output id="o_cap"></output></label><input type="range" id="cap" min="0.035" max="0.09" step="0.0025"></div>
+        <div class="field"><label for="sell">Verkaufsnebenkosten <output id="o_sell"></output></label><input type="range" id="sell" min="0" max="0.05" step="0.0025"></div>
+        <div class="field"><label for="g">Mietwachstum p. a. <output id="o_g"></output></label><input type="range" id="g" min="-0.02" max="0.06" step="0.0025"></div>
+        <div class="field"><label for="T">Haltedauer (Jahre) <output id="o_T"></output></label><input type="range" id="T" min="1" max="15" step="1"></div>
+      </details>
+      <details><summary>Persönliche Steuerdaten</summary>
+        <div class="field"><label for="GS">Grenzsteuersatz ESt <output id="o_GS"></output></label><input type="range" id="GS" min="0.14" max="0.45" step="0.01"></div>
+        <div class="field"><label for="beteiligung">Beteiligungsquote VAE-Gesellschaft <output id="o_beteiligung"></output></label><input type="range" id="beteiligung" min="0.1" max="1" step="0.05"></div>
+      </details>
+      <details><summary>§ 6 AStG Wegzugsbesteuerung</summary>
+        <div class="field"><label for="gw">Gemeiner Wert der Beteiligung (EUR) <output id="o_gw"></output></label><input type="range" id="gw" min="100000" max="20000000" step="50000"></div>
+        <div class="field"><label for="ak">Anschaffungskosten (EUR) <output id="o_ak"></output></label><input type="range" id="ak" min="1000" max="1000000" step="1000"></div>
+        <div class="field"><label for="raten">Anzahl Jahresraten <output id="o_raten"></output></label><input type="range" id="raten" min="1" max="7" step="1"></div>
+        <div class="field"><label for="Ke">Diskontierungszins für den Barwert <output id="o_Ke"></output></label><input type="range" id="Ke" min="0.03" max="0.18" step="0.0005"></div>
+      </details>
+    </form>
+
+    <main>
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Währung"><button type="button" data-cur="AED" aria-pressed="true">AED</button><button type="button" data-cur="EUR" aria-pressed="false">EUR</button></div>
+        <button type="button" class="reset" id="reset">Auf Modellwerte zurücksetzen</button>
+      </div>
+
+      <section class="card" aria-labelledby="h-a">
+        <h2 id="h-a">A. Vier Strukturen im Vergleich – laufende Besteuerung, Jahr 1</h2>
+        <div class="scroll"><table id="t_a"></table></div>
+        <div id="v_a"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-b">
+        <h2 id="h-b">B. § 23 EStG – Veräußerungsgewinn im Privatvermögen</h2>
+        <svg id="frist" viewBox="0 0 700 70" width="100%" role="img" aria-label="Zehnjahresfrist"></svg>
+        <div class="kpis" id="k_b"></div>
+        <div id="v_b"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-c">
+        <h2 id="h-c">C. § 6 AStG – Wegzugsbesteuerung</h2>
+        <div class="kpis" id="k_c"></div>
+        <div id="v_c"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-d">
+        <h2 id="h-d">D. §§ 7 ff. AStG – Hinzurechnungsbesteuerung: Prüfungskaskade</h2>
+        <ol class="cascade" id="cascade"></ol>
+        <div class="kpis" id="k_d"></div>
+        <div id="v_d"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-e">
+        <h2 id="h-e">E. § 2 AStG – Erweitert beschränkte Steuerpflicht</h2>
+        <p class="foot" style="margin:0">Erfasst nur nicht-ausländische Einkünfte eines deutschen Staatsangehörigen, der in den letzten zehn Jahren mindestens fünf Jahre unbeschränkt steuerpflichtig war und in ein Niedrigsteuerland zieht (§ 2 Abs. 1, 2 AStG). Die VAE erheben keine Einkommensteuer, dieses Merkmal ist damit erfüllt. Entscheidend ist: <b>Erfasst werden nur nicht-ausländische Einkünfte im Sinne des § 34d EStG.</b> Die Dubai-Mieten sind ausländische Einkünfte nach § 34d Nr. 7 EStG und bleiben deshalb außen vor, § 2 AStG trifft das zurückgelassene deutsche Vermögen, nicht das neue emiratische. Freigrenze EUR 16.500 (§ 2 Abs. 1 S. 3 AStG), Geltungsdauer zehn Jahre nach Ende der unbeschränkten Steuerpflicht.</p>
+      </section>
+
+      <section class="card" aria-labelledby="h-f">
+        <h2 id="h-f">F. § 2a EStG – Verlustverrechnungsbeschränkung</h2>
+        <div class="kpis" id="k_f"></div>
+        <div id="v_f"></div>
+      </section>
+
+      <div class="cta">
+        <p>Vier Strukturen, fünf Normenkomplexe, eine Frage: Welche Kombination passt zu Ihrem Fall, Ihrer Verweildauer und Ihrer Rückkehrabsicht? Das entscheidet sich an Details, die kein Rechner kennt.</p>
+        <a href="https://calendly.com/arman-bhatti/30min" target="_blank" rel="noopener">Strukturierungs-Check buchen</a>
+      </div>
+
+      <div class="foot">
+        <p><b>Rechtsstand.</b> DBA Deutschland–VAE vom 01.07.2010, ausgelaufen zum 31.12.2021, kein Nachfolgeabkommen (Stand August 2026). Gebäude-AfA linear 3 % nach § 7 Abs. 4 S. 1 Nr. 2 lit. a EStG (Fertigstellung nach dem 31.12.2022) auf 80 % des Kaufpreises; die degressive AfA nach § 7 Abs. 5a EStG steht nur für in der EU oder im EWR belegene Wohngebäude offen und wird für ein Drittstaatsobjekt wie in Dubai nicht gerechnet. Grenzsteuersatz inkl. SolZ 47,475 %, Körperschaftsteuer inkl. SolZ 15,825 %, Niedrigsteuergrenze § 8 Abs. 5 AStG 15 % seit VZ 2024.</p>
+        <p><b>Abweichungen zur zugrunde liegenden Excel-Datei.</b> Vier Zellen in Blatt 08 sind trotz gegenteiligem Änderungsprotokoll weiterhin als Festwert hinterlegt statt als lebende Formel: die Anschaffungskosten für § 23 EStG (sollten auf die GIK aus Blatt 02 verweisen), die Anschaffungskosten für § 6 AStG (sollten auf Blatt 01 verweisen) sowie die VAE-Steuer der Strukturen C und D (sollten auf die in Blatt 07 berechnete Steuer der jeweiligen Halteform verweisen). Bei den hier hinterlegten Modellwerten führt das zufällig zum selben Ergebnis; ändern Sie Kaufpreis, Anschaffungskosten oder Portfolio-Faktor spürbar, rechnet die Excel-Datei an diesen vier Stellen nicht mehr mit. Dieses Modul verwendet durchgehend die lebende, korrekte Verknüpfung.</p>
+        <p>Alle Angaben sind eine unverbindliche Modellrechnung und ersetzen keine steuerliche oder rechtliche Beratung im Einzelfall. Umrechnung EUR/AED zu 4,2769.</p>
+      </div>
+    </main>
+  </div>
+</div>
+<script>const D={P:2000000,A:1000,PGI:132000,v:0.06,SC:18,N:25,LTV:0.6,rate:0.0475,n:25,dmin:1.25,cap:0.0475,sell:0.02,g:0.03,T:10,GS:0.45,beteiligung:1,gw:5000000,ak:25000,raten:7,Ke:0.1105};
+const FX=4.2769;let cur='AED';const $=id=>document.getElementById(id);
+const nf0=new Intl.NumberFormat('de-DE',{maximumFractionDigits:0}),nf2=new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=(x,d=1)=>isFinite(x)?new Intl.NumberFormat('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d}).format(x*100)+' %':'–';
+const moneyAED=x=>nf0.format(cur==='EUR'?x/FX:x)+' '+cur;
+const moneyEUR=x=>nf0.format(x)+' EUR';
+const fmt={P:v=>nf0.format(v),A:v=>nf0.format(v)+' sqft',PGI:v=>nf0.format(v),v:v=>pct(v,0),SC:v=>nf2.format(v),N:v=>v,LTV:v=>pct(v,0),rate:v=>pct(v,2),n:v=>v+' J.',dmin:v=>nf2.format(v)+'x',cap:v=>pct(v,2),sell:v=>pct(v,2),g:v=>pct(v,2),T:v=>v+' J.',GS:v=>pct(v,0),beteiligung:v=>pct(v,0),gw:v=>nf0.format(v)+' EUR',ak:v=>nf0.format(v)+' EUR',raten:v=>v,Ke:v=>pct(v,2)};
+const af=(r,n)=>(1-(1+r/12)**(-n*12))/(r/12);
+const pmtY=(L,r,n)=>L/af(r,n)*12;
+function balAfter(L,r,n,y){const i=r/12,m=L/af(r,n);let b=L;for(let k=0;k<y*12&&k<n*12;k++)b=b*(1+i)-m;return Math.max(0,b)}
+function irr(c){const f=r=>c.reduce((s,x,i)=>s+x/Math.pow(1+r,i),0);let lo=-0.99,hi=2;if(!(f(lo)*f(hi)<0))return NaN;for(let k=0;k<200;k++){const m=(lo+hi)/2;if(f(lo)*f(m)<=0)hi=m;else lo=m}return(lo+hi)/2}
+function PV(r,n,pmt){return pmt*(1-(1+r)**(-n))/r}
+function read(){const p={};for(const k in D)p[k]=parseFloat($(k).value);return p}
+const FREIBETRAG=375000,CTSATZ=0.09,GEBANTEIL=0.8,AFA_DE=0.03,KSt=0.15825,NIEDRIGST=0.15,TEV=0.6;
+function calcObjekt(p){
+  const EGI=p.PGI*(1-p.v),opx=p.A*p.SC+EGI*0.10+3000,NOI=EGI-opx; // Instandhaltung+PM je 5%, Versicherung fix wie Modellwert
+  const L=Math.min(p.LTV*p.P,Math.max(0,NOI/p.dmin/12*af(p.rate,p.n)));
+  const DS=L>0?pmtY(L,p.rate,p.n):0,bal1=L>0?balAfter(L,p.rate,p.n,1):0,Tilg1=L-bal1,Zins1=L>0?DS-Tilg1:0;
+  const AfA_vae=p.P*0.8/20, AfA_de=p.P*GEBANTEIL*AFA_DE;
+  return{NOI,L,Zins1,AfA_vae,AfA_de,EGI,DS};
+}
+function calcVaeTax(NOIp,Zinsp,AfAp){
+  const Erg=NOIp-Zinsp-AfAp;
+  const fb=-Math.min(FREIBETRAG,Math.max(0,Erg));
+  const bmg=Math.max(0,Erg+fb);
+  return{Erg,bmg,tax:bmg*CTSATZ};
+}
+function kpi(k,v,s=''){return `<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div>${s?`<div class="s">${s}</div>`:''}</div>`}
+function verdict(cls,head,txt){return`<div class="verdict ${cls}"><b>${head}</b><span>${txt}</span></div>`}
+
+function render(){
+  const p=read();for(const k in D)$('o_'+k).textContent=fmt[k](p[k]);
+  const o=calcObjekt(p);
+  const GSeff=p.GS*1.055;
+  const NOIp=o.NOI*p.N, Zinsp=o.Zins1*p.N, AfAvaeP=o.AfA_vae*p.N, AfAdeP=o.AfA_de*p.N;
+  const vae=calcVaeTax(NOIp,Zinsp,AfAvaeP); // Free-Zone / Non-resident Steuer, live (korrigiert)
+  const money=moneyAED;
+
+  // A. Vier Strukturen
+  const BemA = NOIp - Zinsp - AfAdeP; // §21 EStG Direkterwerb
+  const BemD = BemA * p.beteiligung; // nicht-ansässige jur. Person, Nexus, mit Beteiligungsquote
+  const vaeC=vae.tax, vaeD=vae.tax; // dieselbe Rechtslage: Free-Zone bzw. Nicht-ansässig, beide 9% auf ident. Bemessungsgrundlage
+  const taxA=Math.max(0,BemA)*GSeff, taxD=Math.max(0,BemD)*GSeff;
+  const creditD=Math.min(taxD,vaeD), netD=taxD-creditD;
+  const cols=[
+    {name:'A – Privatvermögen, Ansässigkeit DE', noi:NOIp, vaeSteuer:0, bem:BemA, satz:GSeff, taxVor:taxA, anr:0, netto:taxA, gesamt:taxA-0},
+    {name:'B – Privatvermögen, nach Wegzug VAE', noi:NOIp, vaeSteuer:0, bem:0, satz:0, taxVor:0, anr:0, netto:0, gesamt:0},
+    {name:'C – VAE-Gesellschaft, Gesellschafter DE', noi:NOIp, vaeSteuer:vaeC, bem:BemD, satz:GSeff, taxVor:taxD, anr:creditD, netto:netD, gesamt:netD-vaeC},
+    {name:'D – Deutsche GmbH, VAE-Betriebsstätte', noi:NOIp, vaeSteuer:vaeD, bem:BemD, satz:KSt, taxVor:Math.max(0,BemD)*KSt, anr:Math.min(Math.max(0,BemD)*KSt,vaeD), netto:Math.max(0,BemD)*KSt-Math.min(Math.max(0,BemD)*KSt,vaeD), gesamt:(Math.max(0,BemD)*KSt-Math.min(Math.max(0,BemD)*KSt,vaeD))-vaeD},
+  ];
+  let h='<tr><th>Position</th>'+cols.map(c=>`<th>${c.name}</th>`).join('')+'</tr>';
+  h+='<tr><td>NOI (Portfolio)</td>'+cols.map(()=>`<td>${money(NOIp)}</td>`).join('')+'</tr>';
+  h+='<tr><td>VAE-Steuer (Aufwand)</td>'+cols.map(c=>`<td class="neg">${money(-c.vaeSteuer)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Deutsche Bemessungsgrundlage</td>'+cols.map(c=>`<td class="${c.bem<0?'neg':''}">${money(c.bem)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Deutscher Steuersatz</td>'+cols.map(c=>`<td>${pct(c.satz,2)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Deutsche Steuer vor Anrechnung</td>'+cols.map(c=>`<td>${money(c.taxVor)}</td>`).join('')+'</tr>';
+  h+='<tr><td>./. Anrechnung ausländischer Steuer</td>'+cols.map(c=>`<td class="neg">${money(-c.anr)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Deutsche Steuer netto</td>'+cols.map(c=>`<td>${money(c.netto)}</td>`).join('')+'</tr>';
+  h+='<tr class="sum"><td>Gesamtsteuerbelastung</td>'+cols.map(c=>`<td>${money(c.gesamt)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Effektive Quote auf NOI</td>'+cols.map(c=>`<td>${pct(NOIp?c.gesamt/NOIp:0,2)}</td>`).join('')+'</tr>';
+  $('t_a').innerHTML=h;
+  const spreadAB=cols[0].gesamt-cols[1].gesamt;
+  $('v_a').innerHTML=verdict(spreadAB>0?'warn':'ok','Wert des Wegzugs: '+money(spreadAB),'Der Sprung von Spalte A auf Spalte B ist die laufende Steuerersparnis durch den Wegzug. Spalte D ist eine Thesaurierungsquote: Bei Ausschüttung an eine in Deutschland ansässige Person kommt Kapitalertragsteuer hinzu, die hier nicht enthalten ist.');
+
+  // B. §23 EStG
+  const EGI=o.EGI, opx=p.A*p.SC+EGI*0.10+3000;
+  const GIK = p.P*1.0730167057555446; // Erwerbsnebenkosten ø 7,3% wie im Retail-Modell, konsistent zu 02_Erwerb
+  const kumAfA = Math.min(p.T,1/AFA_DE)*o.AfA_de;
+  const NOIt=t=>{const egiT=p.PGI*(1+p.g)**(t-1)*(1-p.v); const scT=p.A*p.SC*(1+p.g)**(t-1); const insT=3000*(1+p.g)**(t-1); return egiT-(scT+egiT*0.10+insT)};
+  const saleT=NOIt(p.T)*(1+p.g)/p.cap, sellCost=-saleT*p.sell;
+  const veraeGewinn=saleT+sellCost-(GIK-kumAfA);
+  const innerhalb=p.T<=10;
+  const steuerInnerhalb=Math.max(0,veraeGewinn)*GSeff, steuerAusserhalb=0, wertFrist=steuerInnerhalb-steuerAusserhalb;
+  const svg=$('frist');const Wd=700,y=35;const X=t=>10+(t/15)*660;
+  svg.innerHTML=`<line x1="10" x2="670" y1="${y}" y2="${y}" stroke="var(--rule)" stroke-width="10"/>`+
+    `<rect x="10" width="${X(10)-10}" y="${y-5}" height="10" fill="var(--red-soft)"/>`+
+    `<rect x="${X(10)}" width="${670-X(10)}" y="${y-5}" height="10" fill="var(--teal-soft)"/>`+
+    `<line x1="${X(10)}" x2="${X(10)}" y1="10" y2="60" stroke="var(--ink)" stroke-width="2"/><text x="${X(10)}" y="8" font-size="11" text-anchor="middle">10 Jahre</text>`+
+    `<circle cx="${X(Math.min(p.T,15))}" cy="${y}" r="6" fill="${innerhalb?'var(--red)':'var(--teal)'}"/><text x="${X(Math.min(p.T,15))}" y="${y+22}" font-size="12" text-anchor="middle" font-weight="600">Ihre Haltedauer: ${p.T} J.</text>`+
+    `<text x="10" y="${y+40}" font-size="11" fill="var(--muted)">steuerpflichtig</text><text x="670" y="${y+40}" font-size="11" text-anchor="end" fill="var(--muted)">steuerfrei</text>`;
+  $('k_b').innerHTML=kpi('Veräußerungsgewinn',money(veraeGewinn))+kpi('Innerhalb der Zehnjahresfrist',innerhalb?'ja – steuerpflichtig':'nein – steuerfrei')+kpi('Steuer bei Verkauf innerhalb der Frist',money(steuerInnerhalb))+kpi('Wert des Fristablaufs',money(wertFrist),'ein Tag Unterschied');
+  $('v_b').innerHTML=innerhalb?verdict('warn','Steuerpflichtig','Der Verkauf liegt innerhalb der Zehnjahresfrist des § 23 Abs. 1 S. 1 Nr. 1 EStG. Die in den Vorjahren abgezogene AfA erhöht nach § 23 Abs. 3 S. 4 EStG den Gewinn und wird damit im Exit nachversteuert.'):verdict('ok','Fristablauf erreicht','Nach Ablauf der Zehnjahresfrist ist der Veräußerungsgewinn steuerfrei, unabhängig von seiner Höhe.');
+
+  // C. §6 AStG
+  const fikt=p.gw-p.ak, stpfl=fikt*TEV, steuer=stpfl*GSeff;
+  const rate_j=steuer/p.raten, bw=PV(p.Ke,p.raten,rate_j), vorteil=steuer-bw;
+  $('k_c').innerHTML=kpi('Fiktiver Veräußerungsgewinn',moneyEUR(fikt))+kpi('Davon steuerpflichtig (60%)',moneyEUR(stpfl))+kpi('Wegzugsteuer',moneyEUR(steuer))+kpi('Jahresrate ('+p.raten+'x)',moneyEUR(rate_j))+kpi('Barwert der Ratenzahlung',moneyEUR(bw),'zu '+pct(p.Ke,2)+' diskontiert')+kpi('Stundungsvorteil',moneyEUR(vorteil),pct(vorteil/steuer,1)+' der Steuer);');
+  $('v_c').innerHTML=verdict('warn','Zinslose Stundung ist ein realer Vermögensvorteil','§ 6 Abs. 4 AStG gewährt sieben gleiche Jahresraten ohne Zinsen, regelmäßig gegen Sicherheitsleistung. Bei Rückkehr binnen sieben, verlängerbar auf zwölf Jahren, entfällt die Steuer rückwirkend (§ 6 Abs. 3 AStG) – der Wegzug muss also nicht endgültig sein.');
+
+  // D. Hinzurechnung
+  const step1=p.beteiligung>0.5, step2=true, step3=CTSATZ<NIEDRIGST, step4=false;
+  const steps=[
+    [step1,'Beherrschung durch Steuerinländer','§ 7 Abs. 1, 2 AStG: mehr als 50 % der Stimmrechte, des Kapitals oder des Gewinnanspruchs. Beteiligungsquote hier: '+pct(p.beteiligung,0)+'.'],
+    [step2,'Passive Einkünfte','§ 8 Abs. 1 Nr. 6 lit. b AStG: Vermietung ist passiv, es sei denn, die Einkünfte wären nach einem DBA freizustellen. Mangels Abkommen greift diese Rückausnahme nicht.'],
+    [step3,'Niedrigbesteuerung','§ 8 Abs. 5 AStG: 9 % VAE Corporate Tax liegen unter der Niedrigsteuergrenze von 15 % (seit VZ 2024).'],
+    [!step4,'Substanz- / Motivtest nicht eröffnet','§ 8 Abs. 2 AStG steht nur Gesellschaften mit Sitz oder Geschäftsleitung in der EU oder im EWR offen. Die VAE sind Drittstaat, der Gegenbeweis wirtschaftlicher Substanz ist ausgeschlossen.'],
+  ];
+  $('cascade').innerHTML=steps.map((s,i)=>`<li class="${s[0]?'':'no'}"><span class="n">${i+1}</span><span><b>${s[1]}:</b> ${s[0]?'erfüllt':'nicht erfüllt'}. ${s[2]}</span></li>`).join('');
+  const greift=step1&&step2&&step3;
+  const HZB=BemD, taxHZB=Math.max(0,HZB)*GSeff, anrHZB=Math.min(taxHZB,vaeC), nettoHZB=Math.max(0,taxHZB-anrHZB), gesamtHZB=nettoHZB+vaeC*p.beteiligung;
+  $('k_d').innerHTML=kpi('Ergebnis der Prüfung',greift?'Hinzurechnung greift':'Hinzurechnung greift nicht')+kpi('Hinzurechnungsbetrag',money(HZB))+kpi('Deutsche Steuer darauf',money(taxHZB))+kpi('./. Anrechnung VAE-CT (§ 12 AStG)',money(-anrHZB))+kpi('Nettobelastung Deutschland',money(nettoHZB))+kpi('Gesamtbelastung VAE + DE',money(gesamtHZB),pct(NOIp?gesamtHZB/NOIp:0,2)+' der NOI');
+  $('v_d').innerHTML=greift?verdict('bad','Keine Abschirmwirkung','Gegenüber einem in Deutschland ansässigen Gesellschafter schirmt die VAE-Gesellschaft nicht ab. Im Ergebnis wird auf das deutsche Niveau hochgeschleust: Die 9 % VAE Corporate Tax sind aus deutscher Sicht nur eine Anzahlung.'):verdict('ok','Kein Hinzurechnungsbetrag','Eine der vier Voraussetzungen ist nicht erfüllt.');
+
+  // F. §2a
+  const bem21=o.NOI-o.Zins1-o.AfA_de; // Einzelobjekt, nicht Portfolio
+  const gesperrt=Math.max(0,-bem21);
+  $('k_f').innerHTML=kpi('Bemessungsgrundlage § 21 EStG, Einzelobjekt',moneyAED(bem21))+kpi('Gesperrter Verlust (kumuliert Jahr 1)',moneyAED(gesperrt))+kpi('Steuerwert des gesperrten Verlusts',moneyAED(gesperrt*GSeff),'zum effektiven Satz inkl. SolZ');
+  $('v_f').innerHTML=bem21<0?verdict('warn','Verlust gesperrt','§ 2a Abs. 1 S. 1 Nr. 6 lit. a EStG lässt eine Verrechnung nur mit positiven Vermietungseinkünften aus demselben Staat zu. Die VAE sind Drittstaat (§ 2a Abs. 2a EStG). In Spalte A der Vier-Strukturen-Tabelle steht deshalb häufig eine Steuer von 0, aber ohne Entlastungswirkung, keine Ausschüttung eines Verlustvortrags an anderer Stelle.'):verdict('ok','Kein Verlust im Jahr 1','§ 21-Ergebnis ist positiv, die Sperre läuft in diesem Jahr leer.');
+
+  post();
+}
+function setDefaults(){for(const k in D)$(k).value=D[k]}
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.cur;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()}));
+$('reset').addEventListener('click',()=>{setDefaults();render()});$('f').addEventListener('input',render);
+function post(){try{parent.postMessage({type:'bc-embed-height',id:'steuern-de',height:document.documentElement.scrollHeight},'*')}catch(e){}}
+window.addEventListener('resize',post);setDefaults();render();
+</script></body></html>
