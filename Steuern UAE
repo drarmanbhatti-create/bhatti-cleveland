@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>UAE Corporate Tax – Bhatti & Cleveland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+<style>:root{
+  --paper:#F6F7F9; --panel:#FFFFFF; --ink:#16202E; --muted:#5B6675; --rule:#D9DEE5;
+  --teal:#0E6E6B; --teal-soft:#E3F0EF; --amber:#B45309; --amber-soft:#FBF0E1; --red:#A4262C; --red-soft:#F7E4E5;
+  --focus:#2F5FD0;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+svg{display:block;overflow:hidden;max-width:100%;height:auto}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+.wrap{max-width:1140px;margin:0 auto;padding:32px 20px 48px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.2vw,36px);line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 4px}
+h3{font-size:14px;font-weight:600;margin:0 0 10px;color:var(--ink)}
+p.lead{max-width:68ch;color:var(--muted);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:28px;align-items:start}
+.grid>*{min-width:0}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.inputs{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:6px 18px 16px;position:sticky;top:12px}
+@media (max-width:900px){.inputs{position:static}}
+details{border-bottom:1px solid var(--rule);padding:10px 0}
+details:last-of-type{border-bottom:0}
+summary{cursor:pointer;font-weight:600;font-size:14px;padding:4px 0;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--muted);font-weight:400}
+details[open] summary::after{content:"–"}
+summary::-webkit-details-marker{display:none}
+.field{margin:10px 0 4px}
+.field label{display:flex;justify-content:space-between;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:4px;gap:2px 8px;min-width:0}
+.field label span:first-child,.field label>*:first-child{min-width:0}
+.field label output{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+.field input[type=range]{width:100%;accent-color:var(--teal)}
+.field input[type=number]{width:100%;padding:7px 9px;border:1px solid var(--rule);border-radius:4px;font:inherit;font-variant-numeric:tabular-nums;background:#fff;color:var(--ink)}
+.hint{font-size:12px;color:var(--muted);margin-top:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.toolbar{display:flex;gap:8px;align-items:center;margin:0 0 14px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:#fff}
+.seg button{border:0;background:transparent;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+button.reset{border:1px solid var(--rule);background:#fff;border-radius:4px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;margin-bottom:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border-top:1px solid var(--rule)}
+.kpi{padding:12px 14px 12px 0;border-bottom:1px solid var(--rule)}
+.kpi .k{font-size:12.5px;color:var(--muted)}
+.kpi .v{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi .s{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:4px;font-size:13.5px;margin-top:12px}
+.verdict.ok{background:var(--teal-soft);color:#0B4F4D}
+.verdict.warn{background:var(--amber-soft);color:#7A3A06}
+.verdict.bad{background:var(--red-soft);color:#7C1C21}
+.verdict b{white-space:nowrap}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+th,td{padding:7px 9px;text-align:right;font-size:13px;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font-weight:600;color:var(--muted)}
+td:first-child,th:first-child{text-align:left}
+tr.sum td{font-weight:600;border-top:1px solid var(--ink)}
+.neg{color:var(--red)}
+.foot{font-size:12.5px;color:var(--muted);max-width:90ch}
+.foot p{margin:0 0 8px}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:6px;padding:18px 20px;margin:22px 0}
+.cta p{margin:0;max-width:62ch;color:#D6DCE4;font-size:14px}
+.cta a{background:#fff;color:var(--ink);text-decoration:none;font-weight:600;padding:9px 14px;border-radius:4px;font-size:14px;white-space:nowrap}
+@media (prefers-reduced-motion:no-preference){.bar{transition:height .25s ease,y .25s ease}}
+</style></head><body><div class="wrap">
+  <h1>UAE Corporate Tax: Welche Haltestruktur trägt wirklich Steuer?</h1>
+  <p class="lead">Vier Halteformen für dieselbe Immobilie, ein Steuerrecht. Das Modul skaliert ein Einzelobjekt auf Portfoliogröße, weil der Freibetrag von AED 375.000 bei einer Wohnung praktisch nie überschritten wird und die eigentliche Frage sich erst bei mehreren Objekten stellt.</p>
+
+  <div class="grid">
+    <form class="inputs" id="f" onsubmit="return false" aria-label="Annahmen">
+      <details open><summary>Objekt</summary>
+        <div class="field"><label for="P">Kaufpreis (AED) <output id="o_P"></output></label><input type="range" id="P" min="500000" max="15000000" step="50000"></div>
+        <div class="field"><label for="A">Fläche (sqft) <output id="o_A"></output></label><input type="range" id="A" min="300" max="6000" step="25"></div>
+        <div class="field"><label for="PGI">Jahresmiete bei Vollvermietung (AED) <output id="o_PGI"></output></label><input type="range" id="PGI" min="30000" max="1200000" step="1000"></div>
+        <div class="field"><label for="v">Leerstand und Mietausfall <output id="o_v"></output></label><input type="range" id="v" min="0" max="0.25" step="0.01"></div>
+        <div class="field"><label for="SC">Service Charge (AED/sqft) <output id="o_SC"></output></label><input type="range" id="SC" min="8" max="40" step="0.5"></div>
+      </details>
+      <details><summary>Bewirtschaftung</summary>
+        <div class="field"><label for="mt">Instandhaltung (% der Miete) <output id="o_mt"></output></label><input type="range" id="mt" min="0" max="0.15" step="0.01"></div>
+        <div class="field"><label for="pm">Verwaltung (% der Miete) <output id="o_pm"></output></label><input type="range" id="pm" min="0" max="0.25" step="0.01"></div>
+        <div class="field"><label for="ins">Versicherung und Sonstiges (AED p. a.) <output id="o_ins"></output></label><input type="range" id="ins" min="0" max="20000" step="500"></div>
+      </details>
+      <details><summary>Finanzierung</summary>
+        <div class="field"><label for="LTV">Ziel-Beleihung (LTV) <output id="o_LTV"></output></label><input type="range" id="LTV" min="0" max="0.75" step="0.05"></div>
+        <div class="field"><label for="rate">Zins p. a. <output id="o_rate"></output></label><input type="range" id="rate" min="0.025" max="0.08" step="0.0025"></div>
+        <div class="field"><label for="n">Laufzeit (Jahre) <output id="o_n"></output></label><input type="range" id="n" min="10" max="25" step="1"></div>
+        <div class="field"><label for="dmin">Mindest-DSCR der Bank <output id="o_dmin"></output></label><input type="range" id="dmin" min="1" max="1.6" step="0.05"></div>
+      </details>
+      <details open><summary>Portfolio und VAE-Abschreibung</summary>
+        <div class="field"><label for="N">Portfolio-Faktor (Anzahl Objekte) <output id="o_N"></output></label><input type="range" id="N" min="1" max="100" step="1"></div>
+        <div class="hint">Skaliert das Einzelobjekt. Nur so wird sichtbar, ab wann der Freibetrag von AED 375.000 überhaupt überschritten wird.</div>
+        <div class="field"><label for="gebA">Gebäudeanteil am Kaufpreis <output id="o_gebA"></output></label><input type="range" id="gebA" min="0.5" max="0.95" step="0.05"></div>
+        <div class="field"><label for="ndVae">Nutzungsdauer VAE-Rechnungslegung (Jahre) <output id="o_ndVae"></output></label><input type="range" id="ndVae" min="10" max="40" step="1"></div>
+      </details>
+    </form>
+
+    <main>
+      <div class="toolbar">
+        <div class="seg" role="group" aria-label="Währung"><button type="button" data-cur="AED" aria-pressed="true">AED</button><button type="button" data-cur="EUR" aria-pressed="false">EUR</button></div>
+        <button type="button" class="reset" id="reset">Auf Modellwerte zurücksetzen</button>
+      </div>
+
+      <section class="card">
+        <h2>A. Vier Halteformen dem Grunde nach</h2>
+        <div class="scroll"><table id="t_grund"></table></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-b">
+        <h2 id="h-b">B. Berechnung der Steuer, Jahr 1, Portfolio</h2>
+        <div class="scroll"><table id="t_calc"></table></div>
+        <div id="v_calc"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-b2">
+        <h2 id="h-b2">Gegenprobe: dieselbe Struktur ohne Fremdfinanzierung</h2>
+        <p class="foot" style="margin:0 0 10px">Zinsaufwand und Gebäude-AfA zusammen bestimmen, ob überhaupt eine Bemessungsgrundlage entsteht.</p>
+        <div class="scroll"><table id="t_gegen"></table></div>
+        <div id="v_gegen"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-c">
+        <h2 id="h-c">C. Zinsabzugsschranke (General Interest Deduction Limitation Rule)</h2>
+        <svg id="ebitda" viewBox="0 0 700 90" width="100%" role="img" aria-label="Zinsschranken-Test"></svg>
+        <div id="v_ebitda"></div>
+      </section>
+
+      <section class="card" aria-labelledby="h-d">
+        <h2 id="h-d">D. Small Business Relief</h2>
+        <div class="kpis" id="k_sbr"></div>
+        <div id="v_sbr"></div>
+      </section>
+
+      <div class="cta">
+        <p>9 % VAE Corporate Tax sind nur die halbe Rechnung. Ohne Doppelbesteuerungsabkommen entscheidet die deutsche Seite, was von der Ersparnis übrig bleibt.</p>
+        <a href="modul-steuern-de.html">Weiter zum deutschen Steuer-Layer →</a>
+      </div>
+
+      <div class="foot">
+        <p><b>Rechtsgrundlagen.</b> Federal Decree-Law No. 47 of 2022 (Corporate Tax Law) nebst Cabinet Decisions 49/2023, 55/2023, 56/2023 und 100/2023. Natürliche Personen sind für privates Immobilienvermögen außerhalb einer Lizenzpflicht nicht körperschaftsteuerpflichtig (Art. 11 Abs. 6 CT Law i. V. m. Cabinet Decision 49/2023). Eine Free-Zone-Gesellschaft erzielt mit Wohnimmobilien regelmäßig kein Qualifying Income (Cabinet Decision 100/2023) und zahlt deshalb faktisch denselben Satz wie eine Mainland-Gesellschaft. Nexus einer nicht-ansässigen juristischen Person: Cabinet Decision 56/2023. Zinsschranke: 30 % des steuerlichen EBITDA, Safe Harbour AED 12 Mio. Netto-Zinsaufwand. Small Business Relief: Ministerial Decision No. 131 of 2026 vom 29.07.2026, Umsatzschwelle AED 3 Mio., verlängert auf Steuerperioden mit Ende bis 31.12.2029.</p>
+        <p><b>Methodik.</b> NOI wie im Retail-Modul, multipliziert mit dem Portfolio-Faktor. Zinsaufwand Jahr 1 aus der Annuitätenrechnung. Gebäude-AfA nach VAE-Rechnungslegung linear über die eingestellte Nutzungsdauer, unabhängig von der deutschen AfA. Bemessungsgrundlage = Portfolio-NOI abzüglich Zinsaufwand abzüglich AfA, gemindert um den Freibetrag von AED 375.000 (nicht bei natürlichen Personen, die dem Grunde nach nicht steuerpflichtig sind). Alle Angaben sind eine unverbindliche Modellrechnung und ersetzen keine steuerliche Beratung im Einzelfall.</p>
+      </div>
+    </main>
+  </div>
+</div>
+<script>const D={P:2000000,A:1000,PGI:132000,v:0.06,SC:18,mt:0.05,pm:0.05,ins:3000,LTV:0.6,rate:0.0475,n:25,dmin:1.25,N:25,gebA:0.8,ndVae:20};
+const FX=4.2769;let cur='AED';const $=id=>document.getElementById(id);
+const nf0=new Intl.NumberFormat('de-DE',{maximumFractionDigits:0}),nf2=new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=(x,d=1)=>isFinite(x)?new Intl.NumberFormat('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d}).format(x*100)+' %':'–';
+const money=x=>nf0.format(cur==='EUR'?x/FX:x)+' '+cur;
+const fmt={P:v=>nf0.format(v),A:v=>nf0.format(v)+' sqft',PGI:v=>nf0.format(v),v:v=>pct(v,0),SC:v=>nf2.format(v),mt:v=>pct(v,0),pm:v=>pct(v,0),ins:v=>nf0.format(v),LTV:v=>pct(v,0),rate:v=>pct(v,2),n:v=>v+' J.',dmin:v=>nf2.format(v)+'x',N:v=>v,gebA:v=>pct(v,0),ndVae:v=>v+' J.'};
+const af=(r,n)=>(1-(1+r/12)**(-n*12))/(r/12);
+const pmtY=(L,r,n)=>L/af(r,n)*12;
+function balAfter(L,r,n,y){const i=r/12,m=L/af(r,n);let b=L;for(let k=0;k<y*12;k++)b=b*(1+i)-m;return Math.max(0,b)}
+function read(){const p={};for(const k in D)p[k]=parseFloat($(k).value);return p}
+const FREIBETRAG=375000,CTSATZ=0.09,EBITDAQ=0.3,SAFEH=12000000,SBR=3000000;
+function calc(p){
+  const EGI=p.PGI*(1-p.v),opx=p.A*p.SC+EGI*(p.mt+p.pm)+p.ins,NOI=EGI-opx;
+  const L=Math.min(p.LTV*p.P,Math.max(0,NOI/p.dmin/12*af(p.rate,p.n)));
+  const DS=L>0?pmtY(L,p.rate,p.n):0,bal1=L>0?balAfter(L,p.rate,p.n,1):0,Tilg1=L-bal1,Zins1=L>0?DS-Tilg1:0;
+  const AfA=p.P*p.gebA/p.ndVae;
+  const NOIp=NOI*p.N,Zinsp=Zins1*p.N,AfAp=AfA*p.N;
+  const Erg=NOIp-Zinsp-AfAp;
+  const cols=['Natürliche Person','Free Zone (QFZP)','Mainland','Nicht-ansässig'];
+  const nat=[true,false,false,false];
+  const rows=cols.map((name,i)=>{
+    if(nat[i])return{name,erg:Erg,fb:0,bmg:0,satz:0,tax:0,q:0};
+    const fb=-Math.min(FREIBETRAG,Math.max(0,Erg));
+    const bmg=Math.max(0,Erg+fb);
+    const tax=bmg*CTSATZ;
+    return{name,erg:Erg,fb,bmg,satz:CTSATZ,tax,q:NOIp?tax/NOIp:0};
+  });
+  // Gegenprobe ohne Fremdfinanzierung
+  const ErgNF=NOIp-AfAp;
+  const rowsNF=cols.map((name,i)=>{
+    if(nat[i])return{name,tax:0};
+    const bmg=Math.max(0,ErgNF-FREIBETRAG);
+    return{name,tax:bmg*CTSATZ};
+  });
+  const wirkung=rows.map((r,i)=>rowsNF[i].tax-r.tax);
+  // Zinsschranke
+  const EBITDA=NOIp,lim=EBITDAQ*EBITDA,abzugsf=Math.min(Zinsp,Math.max(lim,SAFEH)),nabzugsf=Zinsp-abzugsf;
+  // SBR
+  const Umsatz=EGI*p.N,eingehalten=Umsatz<=SBR;
+  return{NOI,L,Zins1,AfA,NOIp,Zinsp,AfAp,Erg,rows,ErgNF,rowsNF,wirkung,EBITDA,lim,abzugsf,nabzugsf,Umsatz,eingehalten,taxD:rows[2].tax};
+}
+const kpi=(k,v,s='')=>`<div class="kpi"><div class="k">${k}</div><div class="v">${v}</div>${s?`<div class="s">${s}</div>`:''}</div>`;
+const verdict=(cls,head,txt)=>`<div class="verdict ${cls}"><b>${head}</b><span>${txt}</span></div>`;
+function tGrund(){
+  const rows=[
+    ['CT-Pflicht dem Grunde nach','nein','ja','ja','ja (Nexus)'],
+    ['Anwendbarer Satz','0 %','9 %','9 %','9 %'],
+    ['Registrierungspflicht','erst ab AED 1 Mio. Umsatz','ja','ja','ja'],
+    ['Freibetrag AED 375.000','entfällt','ja','ja','ja'],
+  ];
+  let h='<tr><th>Position</th><th>Natürliche Person</th><th>Free Zone (QFZP)</th><th>Mainland</th><th>Nicht-ansässig</th></tr>';
+  rows.forEach(r=>h+='<tr><td>'+r[0]+'</td>'+r.slice(1).map(c=>`<td style="text-align:center">${c}</td>`).join('')+'</tr>');
+  $('t_grund').innerHTML=h;
+}
+function render(){
+  const p=read();for(const k in D)$('o_'+k).textContent=fmt[k](p[k]);
+  const m=calc(p);
+  tGrund();
+  const f=v=>money(v);
+  let h='<tr><th>Position</th>'+m.rows.map(r=>`<th>${r.name}</th>`).join('')+'</tr>';
+  h+='<tr><td>NOI (Portfolio)</td>'+m.rows.map(()=>`<td>${f(m.NOIp)}</td>`).join('')+'</tr>';
+  h+='<tr><td>./. Zinsaufwand</td>'+m.rows.map(()=>`<td class="neg">${f(-m.Zinsp)}</td>`).join('')+'</tr>';
+  h+='<tr><td>./. Gebäude-AfA</td>'+m.rows.map(()=>`<td class="neg">${f(-m.AfAp)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Steuerpflichtiges Ergebnis</td>'+m.rows.map(r=>`<td class="${r.erg<0?'neg':''}">${f(r.erg)}</td>`).join('')+'</tr>';
+  h+='<tr><td>./. Freibetrag</td>'+m.rows.map(r=>`<td class="neg">${f(r.fb)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Bemessungsgrundlage</td>'+m.rows.map(r=>`<td>${f(r.bmg)}</td>`).join('')+'</tr>';
+  h+='<tr class="sum"><td>UAE Corporate Tax</td>'+m.rows.map(r=>`<td>${f(r.tax)}</td>`).join('')+'</tr>';
+  h+='<tr><td>Effektive Quote auf NOI</td>'+m.rows.map(r=>`<td>${pct(r.q,2)}</td>`).join('')+'</tr>';
+  $('t_calc').innerHTML=h;
+  const allZero=m.rows.every(r=>r.tax===0);
+  $('v_calc').innerHTML=allZero?verdict('ok','Bemessungsgrundlage 0','Zinsaufwand und Gebäude-AfA übersteigen den Portfolio-NOI. Bei diesen Eingaben fällt in keiner Struktur Corporate Tax an.'):verdict('warn','Bemessungsgrundlage positiv','Ab hier bindet der Freibetrag nicht mehr vollständig. Prüfen Sie den Portfolio-Faktor: Bei einem Einzelobjekt ist das oft noch kein Thema, bei mehreren Objekten wird es einer.');
+  let h2='<tr><th>Position</th>'+m.rows.map(r=>`<th>${r.name}</th>`).join('')+'</tr>';
+  h2+='<tr><td>Steuerpfl. Ergebnis ohne Zinsaufwand</td>'+m.rowsNF.map(()=>`<td>${f(m.ErgNF)}</td>`).join('')+'</tr>';
+  h2+='<tr><td>UAE Corporate Tax ohne Fremdfinanzierung</td>'+m.rowsNF.map(r=>`<td>${f(r.tax)}</td>`).join('')+'</tr>';
+  h2+='<tr class="sum"><td>Steuerwirkung der Fremdfinanzierung</td>'+m.wirkung.map(w=>`<td>${f(w)}</td>`).join('')+'</tr>';
+  $('t_gegen').innerHTML=h2;
+  const wMax=Math.max(...m.wirkung);
+  $('v_gegen').innerHTML=wMax>0?verdict('ok','Zinsaufwand + AfA neutralisieren die Bemessungsgrundlage','Das ist der eigentliche Befund: Bei einer fremdfinanzierten Wohnimmobilie binden die 9 % erst, wenn Zinslast und Abschreibung dem NOI gegenüber klein werden, typischerweise gegen Ende der Zinsbindung oder bei geringer Fremdfinanzierung.'):verdict('warn','Kein Unterschied bei diesen Eingaben','Bemessungsgrundlage ist mit und ohne Fremdfinanzierung gleich (meist 0).');
+  const svg=$('ebitda');const Wd=700,x0=10,x1=670,mx=Math.max(m.Zinsp,m.lim,1)*1.15;const X=v=>x0+(x1-x0)*v/mx;
+  svg.innerHTML=`<line x1="${X(SAFEH>mx?x1:X(SAFEH))}" y1="0" y2="0" x2="0"/>`+
+    `<rect x="${x0}" y="10" width="${X(m.Zinsp)-x0}" height="18" fill="${m.nabzugsf>0?'var(--red)':'var(--teal)'}"/><text x="${x0+6}" y="23" font-size="12" fill="#fff">Netto-Zinsaufwand ${money(m.Zinsp)}</text>`+
+    `<rect x="${x0}" y="38" width="${X(m.lim)-x0}" height="18" fill="#9AA6B5"/><text x="${x0+6}" y="51" font-size="12" fill="#fff">30 % EBITDA ${money(m.lim)}</text>`+
+    (SAFEH<mx?`<line x1="${X(SAFEH)}" x2="${X(SAFEH)}" y1="4" y2="60" stroke="var(--amber)" stroke-width="2"/><text x="${X(SAFEH)+4}" y="72" font-size="11" fill="var(--amber)">Safe Harbour ${money(SAFEH)}</text>`:`<text x="${x1-4}" y="72" font-size="11" text-anchor="end" fill="var(--amber)">Safe Harbour ${money(SAFEH)} liegt außerhalb der Achse</text>`);
+  $('v_ebitda').innerHTML=m.nabzugsf>0?verdict('bad','Nicht abzugsfähig: '+money(m.nabzugsf),'Netto-Zinsaufwand übersteigt sowohl die 30-%-EBITDA-Grenze als auch die Safe-Harbour-Schwelle von AED 12 Mio. Der Überhang ist zehn Steuerperioden vortragsfähig.'):verdict('ok','Voll abzugsfähig','Netto-Zinsaufwand liegt unter der Safe-Harbour-Schwelle von AED 12 Mio.; die Zinsschranke greift nicht, unabhängig vom EBITDA-Test. Bei Einzelobjekten praktisch immer der Fall, bei großen Portfolios die zentrale Stellschraube der Fremdkapitalquote.');
+  $('k_sbr').innerHTML=kpi('Umsatz (Portfolio)',money(m.Umsatz),'effektive Bruttomiete')+kpi('Umsatzschwelle',money(SBR))+kpi('Schwelle eingehalten',m.eingehalten?'ja':'nein');
+  $('v_sbr').innerHTML=m.eingehalten?verdict('ok','Small Business Relief verfügbar','Bei Ausübung des Wahlrechts wird der gesamte Umsatz für diese Periode von der Corporate Tax befreit, verliert dafür aber Verlust- und Zinsvorträge. Gilt für Steuerperioden mit Ende bis 31.12.2029.'):verdict('warn','Umsatzschwelle überschritten','Ab AED 3 Mio. Jahresumsatz steht das Small Business Relief nicht mehr zur Wahl.');
+  post();
+}
+function setDefaults(){for(const k in D)$(k).value=D[k]}
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.cur;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()}));
+$('reset').addEventListener('click',()=>{setDefaults();render()});$('f').addEventListener('input',render);
+function post(){try{parent.postMessage({type:'bc-embed-height',id:'steuern-vae',height:document.documentElement.scrollHeight},'*')}catch(e){}}
+window.addEventListener('resize',post);setDefaults();render();
+</script></body></html>
